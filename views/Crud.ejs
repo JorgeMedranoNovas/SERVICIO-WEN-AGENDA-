@@ -1,0 +1,253 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.0.2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  </head>
+  <body>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <div style="float:left;padding-top:10%;padding-left: 2%;padding-right:40px">
+        <div class="card text-center bg-light mb-3" style="max-width: 25rem;">
+            <div class="card-header">Formulario de contacto</div>
+            <!--modificaciones inicio-->
+
+            <% if (contactos._id != 0) { %>
+              <div class="card-body">
+                <h5 class="card-title">Nombre</h5>
+                <form id="modificar" data-id="<%-contactos.id%>" style="padding-bottom: 10px">
+                  <input type="firstname" class="form-control" id="floatingInputValue nombreForm" placeholder="John" value="<%-contactos.nombre%>" name="nombre">
+                <!--</form>-->
+                  <h5 class="card-title" style="padding-top: 10px" >Apellido</h5>
+                <!--<form style="padding-bottom: 10px">-->
+                  <input type="lastname" class="form-control" id="floatingInputValue" placeholder="Lee" value="<%-contactos.apellido%>" name="apellido">
+                <!--</form>-->
+                  <h5 class="card-title" style="padding-top: 10px">Correo</h5>
+                <!--<form style="padding-bottom: 10px">-->
+                  <input type="email" class="form-control" id="floatingInputValue" placeholder="lee@gmail.com" value="<%-contactos.correo%>" name="correo">
+                <!--</form>-->
+                  <h5 class="card-title" style="padding-top: 10px">Telefono</h5>
+                <!--<form style="padding-bottom: 10px">-->
+                  <input type="number" class="form-control" id="floatingInputValue" placeholder="809-000-0000" value="<%-contactos.numero%>" name="numero">
+                  <div style="padding-top: 20px;">
+                    <button href="/crud" class="btn btn-warning">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button class="btn btn-danger" id="btnEliminar" data-id="<%-contactos.id%>" >Eliminar</button>
+                  </div>
+
+                </form>
+            <% } else { %>
+              <div class="card-body">
+                <h5 class="card-title">Nombre</h5>
+                <form id="modificar" style="padding-bottom: 10px">
+                  <input type="firstname" class="form-control" id="floatingInputValue nombreForm" placeholder="John" value="">
+                <!--</form>-->
+                <h5 class="card-title" style="padding-top: 10px" >Apellido</h5>
+                <!--<form style="padding-bottom: 10px">-->
+                  <input type="lastname" class="form-control" id="floatingInputValue" placeholder="Lee">
+                <!--</form>-->
+                <h5 class="card-title" style="padding-top: 10px">Correo</h5>
+                <!--<form style="padding-bottom: 10px">-->
+                  <input type="email" class="form-control" id="floatingInputValue" placeholder="lee@gmail.com">
+                <!--</form>-->
+                <h5 class="card-title" style="padding-top: 10px">Telefono</h5>
+                <!--<form style="padding-bottom: 10px">-->
+                  <input type="number" class="form-control" id="floatingInputValue" placeholder="809-000-0000">
+                  <div style="padding-top: 20px;">
+                    <a href="#" class="btn btn-warning">Cancelar</a>
+                    <a type="submit" class="btn btn-primary">Guardar</a>
+                    <a href="#" class="btn btn-danger" >Eliminar</a>
+                  </div>
+                </form>
+            <% } %> 
+            </div>
+        </div>
+    </div>
+
+    <div style="padding-bottom: 50px;padding-right: 15px;padding-top: 15px">
+        <a id="add" class="btn btn-success" style="float:right" data-bs-toggle="modal" data-bs-target="#modelId">Añadir nuevo contacto</a>
+    </div>
+    
+
+    <div style="float: left;padding-top:5%;padding-left:2%">
+        <div>
+            <H1>Mis contactos</H1>
+        </div>
+        <div style="border-color: rgba(27, 27, 27, 0.603);border-style: solid; height:auto; width:100%">
+            <table class="table" style="border-style: solid;border: 5px;width:100%">
+                <thead>
+                  <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
+                    <th scope="col">Correo</th>
+                  </tr>
+                </thead>
+                <tbody> 
+                    <% if (dataInfo.length > 0) { %>
+                        <% dataInfo.forEach(data => { %>
+                            <tr>
+                                <th scope="row"><%=data.id%></th>
+                                <td><%=data.nombre%></td>
+                                <td><%=data.apellido%></td>
+                                <td><%=data.correo%></td>
+                                <td><a href="/crud/<%=data.id%>" class="btn btn-warning" data-id="<%=data.id%>">Editar</a></td>
+                                <td><a id="btnEliminar" class="btn btn-danger" data-id="<%=data.id%>">Eliminar</a></td>
+                                <td><button id="modalBTN" class="btn btn-success" data-nombre="<%=data.nombre%>" data-correo="<%=data.correo%>">Enviar Correo</button></td>
+                            </tr>
+                        <% }) %>
+                    <% } %>
+                </tbody>
+              </table>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Añadir Contacto</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <h5 class="card-title">Nombre</h5>
+              <form action = "/crud" method="POST" style="padding-bottom: 10px">
+                <input type="firstname" class="form-control" id="floatingInputValue" placeholder="John" name="nombre" >
+              <h5 class="card-title" style="padding-top: 10px">Apellido</h5>
+              <!--<form style="padding-bottom: 10px">-->
+                <input type="lastname" class="form-control" id="floatingInputValue" placeholder="Lee" name="apellido">
+              <!--</form>-->
+              <h5 class="card-title" style="padding-top: 10px">Correo</h5>
+              <!--<form style="padding-bottom: 10px">-->
+                <input type="email" class="form-control" id="floatingInputValue" placeholder="lee@gmail.com" name="correo">
+              <!--</form>-->  
+              <h5 class="card-title" style="padding-top: 10px">Telefono</h5>
+              <!--<form style="padding-bottom: 10px">-->
+                <input type="number" class="form-control" id="floatingInputValue" placeholder="809-000-0000" name="numero">
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <button type="submit" class="btn btn-primary">Crear</button>
+                </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="correoSend" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Enviar Correo</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form id="formularioCorreo">
+            <div class="modal-body">
+              Nombre
+              <input class="form-control" type="text" id="nombreModal" placeholder="Disabledinput" aria-label="Disabled input example" disabled name="nombre:">
+              Correo
+              <input class="form-control" type="text" id="correoModal" placeholder="Disabled input" aria-label="Disabled input example" disabled name="correo:">
+              Mensaje
+              <div class="mb-3">
+                <textarea class="form-control" id="txtModal" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>            
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button id = "btnEnviar" type="button" class="btn btn-primary">Enviar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    
+</body>
+<script>
+  
+
+  const modalBTN = document.querySelector('#modalBTN')
+  console.log(modalBTN)
+  modalBTN.addEventListener('click', () => {
+    const nombre= modalBTN.dataset.nombre;  
+    const correo = modalBTN.dataset.correo;
+    document.getElementById("nombreModal").placeholder=nombre;
+    document.getElementById("correoModal").placeholder=correo;
+    //document.getElementById("formularioCorreo").action=`mailto:${correo}`;
+    $('#correoSend').modal('show')
+  })
+
+  const formEditar = document.getElementById('modificar');
+      console.log(formEditar)
+      formEditar.addEventListener('submit', async(e) => {
+        e.preventDefault()
+        const nombre = formEditar.elements['nombre'].value
+        const apellido = formEditar.elements['apellido'].value;
+        const correo = formEditar.elements['correo'].value;
+        const numero = formEditar.elements['numero'].value;
+        const id = formEditar.dataset.id ;
+        console.log(id, "Asqsq")
+
+        try{
+          const data = await fetch(`/crud/${id}`, {
+            method: 'PUT',
+            headers:{
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({nombre: nombre, apellido: apellido, correo: correo, numero:numero})
+          })
+          const res = await data.json()
+
+          if(res.estado){
+            window.location.href = '/crud'
+          }else{
+            console.log("toy mal")
+          }
+        }catch(error){
+
+        }
+      })
+
+      const btnEliminar = document.querySelector('#btnEliminar')
+      console.log(btnEliminar)
+      btnEliminar.addEventListener('click', async() => {
+        const id = btnEliminar.dataset.id;  
+        try {
+            const data = await fetch(`/crud/${id}`, {
+              method: 'delete'
+            })
+            const res = await data.json()
+            console.log(res)
+            if(res.estado){
+                window.location.href = '/crud '
+            }else{
+                console.log(res)
+            }
+        }catch(error){
+    
+        }
+      })
+
+      const btnEnviar = document.querySelector('#btnEnviar')
+      console.log(btnEnviar)
+      btnEnviar.addEventListener('click',() => {
+        const correo = document.querySelector('#correoModal').placeholder;
+        const mensaje = document.querySelector('#txtModal').value;
+        console.log(`http://mailto:${correo}?subject=Mensaje desde la web &body=${mensaje}`)
+        window.location.href =`mailto:${correo}?subject=Mensaje desde la web &body=${mensaje}`;
+      })
+  
+</script>
+</html>

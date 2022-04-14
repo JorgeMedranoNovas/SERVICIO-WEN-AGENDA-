@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <title>Login</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.0.2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!--<link rel="stylesheet" type="text/css" href="../public/styles.css">-->
+    <style>
+      .loginDiv{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+    
+    .logintxt{
+        padding-bottom: 20px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    </style>
+  </head>
+  <body>
+    <body style="background-color:rgb(0, 162, 255);"></body>    
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    
+    
+    <div class = "loginDiv">
+      <div class="card text-left">
+        <img class="card-img-top" src="holder.js/100px180/" alt="">
+        <div class="card-body">
+          <center style="padding-top: 20px;"><h4 class="card-title">Inicio de sesion</h4></center>
+          <form id="formLogin">
+            <div class = "logintxt">
+              <p class="card-text" style="padding-top: 20px;">Usuario</p>
+              <div class="form-floating mb-3">
+                <input type="user" class="form-control " id="floatingInput" placeholder="user" name="usuario" value="20210308">
+                <label for="floatingInput">El usuario</label> 
+              </div>
+              <p class="card-text">Contraseña</p>
+              <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" value="pongameun100">
+                <label for="floatingPassword">La contraseña</label>
+              </div>
+              <div class="form-check" style="padding-top: 15px;">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Recordarme
+                </label>
+              </div>
+              <div style="padding-top: 20px;"></div>
+              <div>
+                <center><button id="btnSubmit" type="submit" class="btn btn-primary">Login</buttons></center>
+              </div>
+            </div>
+          
+          </form>
+        </div>
+      </div>
+    </div>
+    <div>
+
+    </div>
+    
+  </body>
+  <script>
+    const formLogin = document.getElementById('formLogin');
+      console.log(formLogin)
+      formLogin.addEventListener('submit', async(e) => {
+        e.preventDefault()
+        const user = formLogin.elements['usuario'].value;
+        const pass = formLogin.elements['password'].value;
+        if(user != "<%=logd.usuario%>" || pass != "<%=logd.password%>"){
+          document.getElementById("floatingInput").classList.add('is-invalid');
+          document.getElementById("floatingPassword").classList.add('is-invalid');
+        }else{
+          window.location.href = '/crud '
+        }
+      })
+  </script>
+</html>
