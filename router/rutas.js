@@ -11,7 +11,7 @@ const Contactos = require('../models/contactos')
 
 router.get('/', async (req, res) => {
     const logd = {
-        usuario: '20210308',
+        usuario: '20210912',
         password: 'pongameun100'
     
     }    
